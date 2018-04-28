@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBaseAgent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <!-- <BaseAgent xsi:type="Tunneler">
+    <X>0</X>
+    <Y>0</Y>
+    <Z>0</Z>
+    <Width>2</Width>
+    <Height>2</Height>
+    <Lifetime>64</Lifetime>
+    <MaxLifetime>64</MaxLifetime>
+    <ProbReproduce>0.08</ProbReproduce>
+    <ProbTurn>0.2</ProbTurn>
+    <ProbAscend>0.05</ProbAscend>
+    <Style>dev</Style>
+    <Direction>East</Direction>
+    <ProbSpawnRoomeer>0.02</ProbSpawnRoomeer>
+    <MinHeightDecayRate>0</MinHeightDecayRate>
+    <MaxHeightDecayRate>1</MaxHeightDecayRate>
+    <MinWidthDecayRate>0</MinWidthDecayRate>
+    <MaxWidthDecayRate>2</MaxWidthDecayRate>
+    <SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+  </BaseAgent> -->
+  <BaseAgent xsi:type="Tunneler">
+    <X>0</X>
+    <Y>1</Y>
+    <Z>0</Z>
+    <Width>3</Width>
+    <Height>2</Height>
+    <Lifetime>20</Lifetime>
+    <MaxLifetime>20</MaxLifetime>
+    <ProbReproduce>0.05</ProbReproduce>
+    <ProbTurn>0.1</ProbTurn>
+    <ProbAscend>0.05</ProbAscend>
+    <Style>IndustrialTest</Style>
+    <Direction>dev</Direction>
+    <ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
+    <MinHeightDecayRate>0</MinHeightDecayRate>
+    <MaxHeightDecayRate>1</MaxHeightDecayRate>
+    <MinWidthDecayRate>0</MinWidthDecayRate>
+    <MaxWidthDecayRate>2</MaxWidthDecayRate>
+    <SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+  </BaseAgent>
+
+  <BaseAgent xsi:type="Roomer">
+    <X>0</X>
+    <Y>0</Y>
+    <Z>0</Z>
+    <Height>4</Height>
+    <Style>IndustrialTest</Style>
+
+  </BaseAgent>
+
+  <BaseAgent xsi:type="Tunneler">
+    <X>0</X>
+    <Y>-1</Y>
+    <Z>0</Z>
+    <Width>3</Width>
+    <Height>2</Height>
+    <Lifetime>20</Lifetime>
+    <MaxLifetime>20</MaxLifetime>
+    <ProbReproduce>0.05</ProbReproduce>
+    <ProbTurn>0.1</ProbTurn>
+    <ProbAscend>0.05</ProbAscend>
+    <Style>dev</Style>
+    <Direction>South</Direction>
+    <ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
+    <MinHeightDecayRate>0</MinHeightDecayRate>
+    <MaxHeightDecayRate>1</MaxHeightDecayRate>
+    <MinWidthDecayRate>0</MinWidthDecayRate>
+    <MaxWidthDecayRate>2</MaxWidthDecayRate>
+    <SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+  </BaseAgent>
+  
+</ArrayOfBaseAgent>
