@@ -41,11 +41,15 @@ namespace NailsLib.Decorators
             NailsCube cube = null;
             try
             {
-                cube = this.map.NailsCubes.Where(c => c.X == x && c.Y == y && c.Z == z).ToList()[0];
-
+                cube = this.map.GetCube(x, y, z);
             } catch(Exception e)
             {
                 log.Error("NailsAlifeMap.GetLocation(): Caught exception: ", e);
+            }
+
+            if(cube == null)
+            {
+                return null;
             }
 
             return cube.StyleName;
