@@ -1,4 +1,4 @@
-# Summary #
+## Summary ##
 
 Nails is intended to be a suite of tools for quickly blocking out maps on Valve's Source Engine. 
 
@@ -8,7 +8,7 @@ http://dungeonmaker.sourceforge.net/DM2_Manual/manual3.html
 
 The generator works by simulating "artificial life forms" that carve out layouts by following randomly specified rules, ie tunnelers go straight each step with a certain percent chance of turning 90 degrees.
 
-# How To Use #
+## How To Use ##
 
 Usage of NailsCmd.exe:
 
@@ -54,7 +54,7 @@ The following XML demonstrates a random map configuration that has one tunneler 
 ```
 
 
-# Dependencies #
+## Dependencies ##
 
 * VMFParser (https://github.com/BenVlodgi/VMFParser)
 * CommandLineParser (https://github.com/commandlineparser/commandline)

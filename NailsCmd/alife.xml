@@ -31,8 +31,8 @@
     <ProbReproduce>0.05</ProbReproduce>
     <ProbTurn>0.1</ProbTurn>
     <ProbAscend>0.05</ProbAscend>
-    <Style>IndustrialTest</Style>
-    <Direction>dev</Direction>
+    <Style>dev</Style>
+    <Direction>North</Direction>
     <ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
     <MinHeightDecayRate>0</MinHeightDecayRate>
     <MaxHeightDecayRate>1</MaxHeightDecayRate>
