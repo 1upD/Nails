@@ -22,23 +22,24 @@
   </BaseAgent> -->
   <BaseAgent xsi:type="Tunneler">
     <X>0</X>
-    <Y>1</Y>
+    <Y>0</Y>
     <Z>0</Z>
     <Width>3</Width>
-    <Height>2</Height>
-    <Lifetime>20</Lifetime>
-    <MaxLifetime>20</MaxLifetime>
-    <ProbReproduce>0.05</ProbReproduce>
-    <ProbTurn>0.1</ProbTurn>
-    <ProbAscend>0.05</ProbAscend>
+    <Height>3</Height>
+    <Lifetime>32</Lifetime>
+    <MaxLifetime>32</MaxLifetime>
+    <ProbReproduce>0.0625</ProbReproduce>
+    <ProbTurn>0.0625</ProbTurn>
+    <ProbAscend>0.0625</ProbAscend>
     <Style>dev</Style>
     <Direction>North</Direction>
-    <ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
+    <ProbSpawnRoomeer>0.0625</ProbSpawnRoomeer>
     <MinHeightDecayRate>0</MinHeightDecayRate>
     <MaxHeightDecayRate>1</MaxHeightDecayRate>
     <MinWidthDecayRate>0</MinWidthDecayRate>
-    <MaxWidthDecayRate>2</MaxWidthDecayRate>
+    <MaxWidthDecayRate>1</MaxWidthDecayRate>
     <SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+	<LifetimeDecayRate>8</LifetimeDecayRate>
   </BaseAgent>
 
   <BaseAgent xsi:type="Roomer">
@@ -46,29 +47,8 @@
     <Y>0</Y>
     <Z>0</Z>
     <Height>4</Height>
-    <Style>IndustrialTest</Style>
-
-  </BaseAgent>
-
-  <BaseAgent xsi:type="Tunneler">
-    <X>0</X>
-    <Y>-1</Y>
-    <Z>0</Z>
-    <Width>3</Width>
-    <Height>2</Height>
-    <Lifetime>20</Lifetime>
-    <MaxLifetime>20</MaxLifetime>
-    <ProbReproduce>0.05</ProbReproduce>
-    <ProbTurn>0.1</ProbTurn>
-    <ProbAscend>0.05</ProbAscend>
     <Style>dev</Style>
-    <Direction>South</Direction>
-    <ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
-    <MinHeightDecayRate>0</MinHeightDecayRate>
-    <MaxHeightDecayRate>1</MaxHeightDecayRate>
-    <MinWidthDecayRate>0</MinWidthDecayRate>
-    <MaxWidthDecayRate>2</MaxWidthDecayRate>
-    <SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+
   </BaseAgent>
   
 </ArrayOfBaseAgent>

@@ -35,6 +35,7 @@ namespace Alife.Agents
         public string Style;
         public AlifeDirection Direction;
         public bool SpawnRoomerOnDeath;
+        public int LifetimeDecayRate;
 
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -58,6 +59,7 @@ namespace Alife.Agents
             this.MinWidthDecayRate = 0;
             this.ProbSpawnRoomer = 0.0f;
             this.SpawnRoomerOnDeath = true;
+            this.LifetimeDecayRate = 1;
         }
 
         /**
@@ -70,7 +72,7 @@ namespace Alife.Agents
             int width = 1, int height = 2,
             int lifetime = 1, int maxLifetime = 1,
             float probReproduce = 0.0f, float probTurn = 0.0f, float probAscend = 0.0f,
-            AlifeDirection direction = AlifeDirection.East, int MaxHeighDecayRate = 0, int MinHeightDecayRate = 0, int MaxWidthDecayRate = 0, int MinWidthDecayRate = 0, float ProbSpawnRoomer = 0.0f, bool spawnRoomerOnDeath = true)
+            AlifeDirection direction = AlifeDirection.East, int MaxHeighDecayRate = 0, int MinHeightDecayRate = 0, int MaxWidthDecayRate = 0, int MinWidthDecayRate = 0, float ProbSpawnRoomer = 0.0f, bool spawnRoomerOnDeath = true, int LifeTimeDecayRate = 1)
         {
             this.X = x;
             this.Y = y;
@@ -86,6 +88,9 @@ namespace Alife.Agents
             this.Style = style;
             this.ProbSpawnRoomer = ProbSpawnRoomer;
             this.SpawnRoomerOnDeath = spawnRoomerOnDeath;
+            this.LifetimeDecayRate = 1;
+
+            log.Debug(string.Format("Tunneler spawned at {0}, {1}, {2}.", this.X, this.Y, this.Z));
         }
 
         public new void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -115,7 +120,7 @@ namespace Alife.Agents
         {
             try {
             // Check if agent is still alive
-            if (this.Lifetime-- > 0)
+            if (this.Lifetime > 0)
             {
                 int seed = this.X + this.Y + this.Z + (int)this.Direction + this.Height + this.Width + (int)System.DateTime.Now.Ticks;
 
@@ -142,7 +147,7 @@ namespace Alife.Agents
                     AlifeDirection childDirection = AlifeDirectionOperations.Add(this.Direction, polarity);
                     int widthDecay = random.Next(this.MinWidthDecayRate, this.MaxWidthDecayRate);
                     int heightDecay = random.Next(this.MinHeightDecayRate, this.MaxHeightDecayRate);
-                    Tunneler child = new Tunneler(this.Style, this.X, this.Y, this.Z, this.Width - widthDecay, this.Height - heightDecay, this.MaxLifetime - 1, this.MaxLifetime - 1, this.ProbReproduce, this.ProbTurn, this.ProbAscend, childDirection);
+                    Tunneler child = new Tunneler(this.Style, this.X, this.Y, this.Z, this.Width - widthDecay, this.Height - heightDecay, this.MaxLifetime - this.LifetimeDecayRate, this.MaxLifetime - this.LifetimeDecayRate, this.ProbReproduce, this.ProbTurn, this.ProbAscend, childDirection);
                     map.Agents.Add(child);
                 }
                 else
@@ -150,8 +155,9 @@ namespace Alife.Agents
                     sample = random.NextDouble();
                     if (sample < this.ProbSpawnRoomer)
                     {
-                        Roomer child = new Roomer(x: this.X, y: this.Y, z: this.Z, style: this.Style, height: Math.Max(this.Height, 2));
-                    }
+                        Roomer child = new Roomer(x: this.X, y: this.Y, z: this.Z, style: this.Style, height: Math.Max(this.Height, 2), maxWidth: Math.Min(this.Width * 2, 3), mustDeploy: false);
+                        map.Agents.Add(child);
+                        }
                 }
 
                 // Get new random seed
@@ -209,11 +215,18 @@ namespace Alife.Agents
             }
             else if (this.SpawnRoomerOnDeath)
             {
-                // Add a roomer
-                map.Agents.Add(new Roomer(this.X, this.Y, this.Z, this.Style, Math.Max(this.Height, 2)));
+                    log.Debug(string.Format("Tunneler died at {0}, {1}, {2}.", this.X, this.Y, this.Z));
 
+                    // Add a roomer
+                    Roomer child = new Roomer(x: this.X, y: this.Y, z: this.Z, style: this.Style, height: Math.Max(this.Height, 2), maxWidth: Math.Min(this.Width * 2, 3));
+                    map.Agents.Add(child);
+                
+
+                }
+
+            this.Lifetime--;
             }
-        } catch(Exception e){
+            catch (Exception e){
                 log.Error("Error in Tunneler Step function: ", e);
             }
         }
