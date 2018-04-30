@@ -27,7 +27,6 @@ namespace Alife.Agents
         private int _x2;
         private int _y1;
         private int _y2;
-        private int _dz;
         public int Height;
         public string Style;
         public int MaxWidth;
