@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace NailsLib.Data
 {
-	public class NailsTheme
+	public class NailsStyle
 	{
 		public string Name;
 

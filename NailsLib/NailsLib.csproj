@@ -57,7 +57,7 @@
     <Compile Include="Data\NailsEnum.cs" />
     <Compile Include="Data\NailsInstance.cs" />
     <Compile Include="Data\NailsMap.cs" />
-    <Compile Include="Data\NailsTheme.cs" />
+    <Compile Include="Data\NailsStyle.cs" />
     <Compile Include="Data\NailsConfig.cs" />
     <Compile Include="Decorators\NailsAlifeMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

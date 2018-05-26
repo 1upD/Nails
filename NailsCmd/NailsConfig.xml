@@ -90,29 +90,29 @@
 		<MustDeploy>true</MustDeploy>
 	  </BaseAgent>
   </Agents>
-  <Themes>
-    <NailsTheme>
+  <Styles>
+    <NailsStyle>
       <Name>dev</Name>
       <Instances>
         <NailsInstance>
           <Name>wall</Name>
           <Filepaths>
-            <string>dev/wall</string>
+            <string>dev/wall.vmf</string>
           </Filepaths>
         </NailsInstance>
         <NailsInstance>
           <Name>ceiling</Name>
           <Filepaths>
-            <string>dev/ceiling</string>
+            <string>dev/ceiling.vmf</string>
           </Filepaths>
         </NailsInstance>
         <NailsInstance>
           <Name>floor</Name>
           <Filepaths>
-            <string>dev/floor</string>
+            <string>dev/floor.vmf</string>
           </Filepaths>
         </NailsInstance>
 		</Instances>
-    </NailsTheme>
-  </Themes>
+    </NailsStyle>
+  </Styles>
 </NailsConfig>

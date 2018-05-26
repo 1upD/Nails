@@ -45,7 +45,7 @@ namespace NailsLib.Adapters
             int seed = aEntID + aX + aY + aZ + aRotation;
             Random random = new Random(seed);
 
-            List<string> filepaths = this.Config.GetTheme(aStyleName).GetInstancePaths(aInstanceName);
+            List<string> filepaths = this.Config.GetStyle(aStyleName).GetInstancePaths(aInstanceName);
 
             string filepath = filepaths[random.Next(filepaths.Count)];
 

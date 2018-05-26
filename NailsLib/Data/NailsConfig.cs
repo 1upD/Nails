@@ -19,15 +19,15 @@ namespace NailsLib.Data
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public List<BaseAgent> Agents;
-		public List<NailsTheme> Themes;
+		public List<NailsStyle> Styles;
 
 		public NailsConfig()
 		{
 		}
 
-        public NailsTheme GetTheme(string aThemeName)
+        public NailsStyle GetStyle(string aStyleName)
         {
-            return this.Themes.Where(t => t.Name == aThemeName).ToList()[0];
+            return this.Styles.Where(t => t.Name == aStyleName).ToList()[0];
         }
 
 		/**
