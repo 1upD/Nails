@@ -6,38 +6,29 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
+using System.Xml.Schema;
 using System.Xml.Serialization;
 
 namespace NailsLib.Data
 {
 	[Serializable]
-	public class NailsConfig : ISerializable
-	{
+    public class NailsConfig : ISerializable
+
+    {
 		private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
 		public List<BaseAgent> Agents;
-		public List<Theme> Themes;
+		public List<NailsTheme> Themes;
 
 		public NailsConfig()
 		{
 		}
 
-		void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-		{
-			// What do I need this for?
-		}
-
-		public class Theme : NailsTheme
-		{
-
-			public Dictionary<string, List<string>> Instances;
-
-			public Theme()
-			{
-				this.SetThemeDictionary(Instances);
-			}
-
-		}
+        public NailsTheme GetTheme(string aThemeName)
+        {
+            return this.Themes.Where(t => t.Name == aThemeName).ToList()[0];
+        }
 
 		/**
 	     * Static method to read configuration from an XML file and return a NailsConfig object.
@@ -85,5 +76,9 @@ namespace NailsLib.Data
 			}
 		}
 
-	}
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

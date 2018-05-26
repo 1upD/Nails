@@ -59,35 +59,8 @@ namespace NailsCmd
         {
             try
             {
-				// Goofy hacky code -delet this
-				List<BaseAgent> agents = AlifeConfigurator.ReadConfiguration("alife.xml");
-				NailsConfig config = new NailsConfig();
-
-				config.Agents = agents;
-
-				NailsConfig.Theme theme = new NailsConfig.Theme();
-
-				theme.Name = "dev";
-
-				var themeDict = new Dictionary<string, List<string>>();
-
-				var list = new List<string>();
-				list.Add("Nails/dev/floor");
-
-				themeDict.Add("wall", list);
-
-				theme.SetThemeDictionary(themeDict);
-
-				config.Themes = new List<NailsConfig.Theme>();
-				config.Themes.Add(theme);
-
-				NailsConfig.WriteConfiguration("NailsConfig.xml", config);
-
-
-				// End goofy code
-
 				// Read agents from XML file
-				config = NailsConfig.ReadConfiguration(opts.InputFileName);
+				NailsConfig config = NailsConfig.ReadConfiguration(opts.InputFileName);
 
                 // Create a new nails map
                 NailsMap nailsMap = new NailsMap();
@@ -98,11 +71,11 @@ namespace NailsCmd
                 AlifeSimulation.Simulate(ref alifeMap, opts.Lifetime);
 
                 // Write out to a file
-                VMFAdapter vmfAdapter = new VMFAdapter(opts.OutputFileName);
+                VMFAdapter vmfAdapter = new VMFAdapter(filename : opts.OutputFileName, config : config);
                 vmfAdapter.Export(nailsMap);
             } catch(Exception e)
             {
-                log.Error("NailsCmd caught fatal exception: ", e);
+                log.Fatal("NailsCmd caught fatal exception: ", e);
             }
 
         }

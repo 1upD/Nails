@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace NailsLib.Data
 {
@@ -10,9 +11,9 @@ namespace NailsLib.Data
 	{
 		public string Name;
 
-		private Dictionary<string, List<string>> _themeDictionary;
+        public List<NailsInstance> Instances;
 
-		/**
+        /**
 		 * <summary> 
 		 * Returns a list of filepaths for a given instance name.
 		 * If this theme does not have any instances with that name,
@@ -20,23 +21,12 @@ namespace NailsLib.Data
 		 * <author>1upD</author>
 		 * </summary>
 		 */
-		public List<string> GetInstancePaths(string aInstanceName)
-		{
-			if (this._themeDictionary.ContainsKey(aInstanceName))
-			{
-				return this._themeDictionary[aInstanceName];
-			} else
-			{
-				return null;
-			}
-		}
-
-		public void SetThemeDictionary(Dictionary<string, List<string>> themeDictionary)
-		{
-			this._themeDictionary = themeDictionary;
-		}
-
-	}
+        public List<string> GetInstancePaths(string aInstanceName)
+        {
+            // Unreadable linq expression gets the filepath list from an instance by instance name
+            return Instances.Where(i => i.Name == aInstanceName).Select(i => i.Filepaths).ToList()[0];
+        }
+    }
 
 
 }

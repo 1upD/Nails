@@ -55,6 +55,7 @@
     <Compile Include="Adapters\VMFAdapter.cs" />
     <Compile Include="Data\NailsCube.cs" />
     <Compile Include="Data\NailsEnum.cs" />
+    <Compile Include="Data\NailsInstance.cs" />
     <Compile Include="Data\NailsMap.cs" />
     <Compile Include="Data\NailsTheme.cs" />
     <Compile Include="Data\NailsConfig.cs" />
