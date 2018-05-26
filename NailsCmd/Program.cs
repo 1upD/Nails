@@ -26,7 +26,7 @@ namespace NailsCmd
          */
         class Options
         {
-            [Option('f', "file", Required = false, Default = "alife.xml", HelpText = "XML containing agent configuration.")]
+            [Option('f', "file", Required = false, Default = "NailsConfig.xml", HelpText = "Nails configuration")]
             public string InputFileName { get; set; }
 
             [Option('o', "output", Required = false, Default = "output.vmf", HelpText = "Filename to write out to.")]
@@ -59,13 +59,40 @@ namespace NailsCmd
         {
             try
             {
-                // Read agents from XML file
-                List<BaseAgent> agents = AlifeConfigurator.ReadConfiguration(opts.InputFileName);
+				// Goofy hacky code -delet this
+				List<BaseAgent> agents = AlifeConfigurator.ReadConfiguration("alife.xml");
+				NailsConfig config = new NailsConfig();
+
+				config.Agents = agents;
+
+				NailsConfig.Theme theme = new NailsConfig.Theme();
+
+				theme.Name = "dev";
+
+				var themeDict = new Dictionary<string, List<string>>();
+
+				var list = new List<string>();
+				list.Add("Nails/dev/floor");
+
+				themeDict.Add("wall", list);
+
+				theme.SetThemeDictionary(themeDict);
+
+				config.Themes = new List<NailsConfig.Theme>();
+				config.Themes.Add(theme);
+
+				NailsConfig.WriteConfiguration("NailsConfig.xml", config);
+
+
+				// End goofy code
+
+				// Read agents from XML file
+				config = NailsConfig.ReadConfiguration(opts.InputFileName);
 
                 // Create a new nails map
                 NailsMap nailsMap = new NailsMap();
                 AlifeMap alifeMap = new NailsAlifeMap(nailsMap);
-                alifeMap.Agents = agents;
+                alifeMap.Agents = config.Agents;
 
                 // Run the simulation
                 AlifeSimulation.Simulate(ref alifeMap, opts.Lifetime);

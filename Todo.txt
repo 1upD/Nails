@@ -1,0 +1,5 @@
+* Make themes XML configurable
+* Auto-discover themes based on file structure
+* New Alife entities
+	* Convolutionary
+	* Consolidator

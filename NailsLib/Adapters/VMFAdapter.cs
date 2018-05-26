@@ -15,7 +15,7 @@ namespace NailsLib.Adapters
      * <author>1upD</author>
      * </summary>
      */
-    public class VMFAdapter
+    public class VMFAdapter : NailsMapAdapter
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
