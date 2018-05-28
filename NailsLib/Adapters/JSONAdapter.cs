@@ -13,7 +13,7 @@ namespace NailsLib.Adapters
     * <author>1upD</author>
     * </summary>
     */
-    public class JSONAdapter
+    public class JSONAdapter : NailsMapAdapter
     {
 
         private String _filename;

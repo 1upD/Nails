@@ -15,7 +15,7 @@ namespace NailsLib.Adapters
      * <author>1upD</author>
      * </summary>
      */
-    public class VMFAdapter
+    public class VMFAdapter : NailsMapAdapter
     {
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
@@ -23,13 +23,45 @@ namespace NailsLib.Adapters
         private int _vertical_scale;
         private string _filename;
         private VMF _vmf;
+        private NailsConfig Config;
 
-        public VMFAdapter(string filename, int horizontal_scale = 64, int vertical_scale = 64)
+        public VMFAdapter(string filename, int horizontal_scale = 64, int vertical_scale = 64, NailsConfig config = null)
         {
+            this.Config = config;
+
+            if(Config == null)
+            {
+                Config = new NailsConfig();
+            }
+
             this._filename = filename;
             this._horizontal_scale = horizontal_scale;
             this._vertical_scale = vertical_scale;
             this._vmf = new VMF(); // Blank VMF in case export is called before input
+        }
+
+        private instanceData MakeInstance(string aInstanceName, string aStyleName, int aRotation, int aEntID, int aX, int aY, int aZ)
+        {
+            try
+            {
+                int seed = aEntID + aX + aY + aZ + aRotation;
+                Random random = new Random(seed);
+
+                List<string> filepaths = this.Config.GetStyle(aStyleName).GetInstancePaths(aInstanceName);
+
+                string filepath = filepaths[random.Next(filepaths.Count)];
+
+                instanceData instance = new instanceData { filename = "Nails/" + filepath, rotation = aRotation };
+                instance.xpos = aX;
+                instance.ypos = aY;
+                instance.zpos = aZ;
+                instance.ent_id = aEntID;
+                return instance;
+            } catch(Exception e)
+            {
+                log.Error("VMFAdapter caught exception while generating instance data: ", e);
+            }
+            return null;
         }
 
         /**
@@ -57,61 +89,37 @@ namespace NailsLib.Adapters
 
                 if (faces.Contains(NailsCubeFace.Floor))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/floor.vmf", rotation = 0 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("floor", cube.StyleName, 0, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
 
                 if (faces.Contains(NailsCubeFace.Front))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/wall.vmf", rotation = 0 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("wall", cube.StyleName, 0, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
 
                 if (faces.Contains(NailsCubeFace.Left))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/wall.vmf", rotation = 90 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("wall", cube.StyleName, 90, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
 
                 if (faces.Contains(NailsCubeFace.Back))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/wall.vmf", rotation = 180 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("wall", cube.StyleName, 180, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
 
                 if (faces.Contains(NailsCubeFace.Right))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/wall.vmf", rotation = 270 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("wall", cube.StyleName, 270, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
 
                 if (faces.Contains(NailsCubeFace.Ceiling))
                 {
-                    instanceData instance = new instanceData { filename = "Nails/" + cube.StyleName + "/ceiling.vmf", rotation = 0 };
-                    instance.xpos = x_pos;
-                    instance.ypos = y_pos;
-                    instance.zpos = z_pos;
-                    instance.ent_id = i++;
+                    instanceData instance = this.MakeInstance("ceiling", cube.StyleName, 0, i++, x_pos, y_pos, z_pos);
                     insertInstanceIntoVMF(instance, output_vmf);
                 }
             }
