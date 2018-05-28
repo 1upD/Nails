@@ -114,5 +114,37 @@
         </NailsInstance>
 		</Instances>
     </NailsStyle>
+	  <NailsStyle>
+      <Name>RandomTest</Name>
+      <Instances>
+        <NailsInstance>
+          <Name>wall</Name>
+          <Filepaths>
+            <string>RandomTest/wall1.vmf</string>
+            <string>RandomTest/wall2.vmf</string>
+            <string>RandomTest/wall3.vmf</string>
+            <string>RandomTest/wall4.vmf</string>
+			</Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>ceiling</Name>
+          <Filepaths>
+            <string>RandomTest/ceiling1.vmf</string>
+            <string>RandomTest/ceiling2.vmf</string>
+            <string>RandomTest/ceiling3.vmf</string>
+            <string>RandomTest/ceiling4.vmf</string>			
+			</Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>floor</Name>
+          <Filepaths>
+            <string>RandomTest/floor1.vmf</string>
+            <string>RandomTest/floor2.vmf</string>
+            <string>RandomTest/floor3.vmf</string>
+            <string>RandomTest/floor4.vmf</string>
+			</Filepaths>
+        </NailsInstance>
+		</Instances>
+    </NailsStyle>
   </Styles>
 </NailsConfig>

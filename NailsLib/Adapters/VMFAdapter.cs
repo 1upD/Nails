@@ -42,19 +42,26 @@ namespace NailsLib.Adapters
 
         private instanceData MakeInstance(string aInstanceName, string aStyleName, int aRotation, int aEntID, int aX, int aY, int aZ)
         {
-            int seed = aEntID + aX + aY + aZ + aRotation;
-            Random random = new Random(seed);
+            try
+            {
+                int seed = aEntID + aX + aY + aZ + aRotation;
+                Random random = new Random(seed);
 
-            List<string> filepaths = this.Config.GetStyle(aStyleName).GetInstancePaths(aInstanceName);
+                List<string> filepaths = this.Config.GetStyle(aStyleName).GetInstancePaths(aInstanceName);
 
-            string filepath = filepaths[random.Next(filepaths.Count)];
+                string filepath = filepaths[random.Next(filepaths.Count)];
 
-            instanceData instance = new instanceData { filename = "Nails/" + filepath, rotation = aRotation };
-            instance.xpos = aX;
-            instance.ypos = aY;
-            instance.zpos = aZ;
-            instance.ent_id = aEntID;
-            return instance;
+                instanceData instance = new instanceData { filename = "Nails/" + filepath, rotation = aRotation };
+                instance.xpos = aX;
+                instance.ypos = aY;
+                instance.zpos = aZ;
+                instance.ent_id = aEntID;
+                return instance;
+            } catch(Exception e)
+            {
+                log.Error("VMFAdapter caught exception while generating instance data: ", e);
+            }
+            return null;
         }
 
         /**

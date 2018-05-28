@@ -24,7 +24,12 @@ namespace NailsLib.Data
         public List<string> GetInstancePaths(string aInstanceName)
         {
             // Unreadable linq expression gets the filepath list from an instance by instance name
-            return Instances.Where(i => i.Name == aInstanceName).Select(i => i.Filepaths).ToList()[0];
+            var instances = Instances.Where(i => i.Name == aInstanceName).Select(i => i.Filepaths).ToList();
+            if(instances == null || instances.Count < 1)
+            {
+                return null;
+            }
+            return instances[0];
         }
     }
 

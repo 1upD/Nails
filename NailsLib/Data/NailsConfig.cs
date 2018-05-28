@@ -27,7 +27,13 @@ namespace NailsLib.Data
 
         public NailsStyle GetStyle(string aStyleName)
         {
-            return this.Styles.Where(t => t.Name == aStyleName).ToList()[0];
+            var styles = this.Styles.Where(t => t.Name == aStyleName).ToList();
+            if (styles == null || styles.Count < 1)
+            {
+                return null;
+            }
+
+            return styles[0];            
         }
 
 		/**
