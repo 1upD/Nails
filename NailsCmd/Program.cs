@@ -26,7 +26,7 @@ namespace NailsCmd
          */
         class Options
         {
-            [Option('f', "file", Required = false, Default = "alife.xml", HelpText = "XML containing agent configuration.")]
+            [Option('f', "file", Required = false, Default = "NailsConfig.xml", HelpText = "Nails configuration")]
             public string InputFileName { get; set; }
 
             [Option('o', "output", Required = false, Default = "output.vmf", HelpText = "Filename to write out to.")]
@@ -34,6 +34,13 @@ namespace NailsCmd
 
             [Option('t', "lifetime", Required = false, Default = 40, HelpText = "Number of steps in the simulation.")]
             public int Lifetime { get; set; }
+
+            [Option('h', "hscale", Required = false, Default = 64, HelpText = "Horizontal scale")]
+            public int HorizontalScale { get; set; }
+
+            [Option('v', "vscale", Required = false, Default = 64, HelpText = "Horizontal scale")]
+            public int VerticalScale { get; set; }
+
         }
 
 
@@ -59,23 +66,23 @@ namespace NailsCmd
         {
             try
             {
-                // Read agents from XML file
-                List<BaseAgent> agents = AlifeConfigurator.ReadConfiguration(opts.InputFileName);
+				// Read agents from XML file
+				NailsConfig config = NailsConfig.ReadConfiguration(opts.InputFileName);
 
                 // Create a new nails map
                 NailsMap nailsMap = new NailsMap();
                 AlifeMap alifeMap = new NailsAlifeMap(nailsMap);
-                alifeMap.Agents = agents;
+                alifeMap.Agents = config.Agents;
 
                 // Run the simulation
                 AlifeSimulation.Simulate(ref alifeMap, opts.Lifetime);
 
                 // Write out to a file
-                VMFAdapter vmfAdapter = new VMFAdapter(opts.OutputFileName);
+                VMFAdapter vmfAdapter = new VMFAdapter(filename : opts.OutputFileName, horizontal_scale : opts.HorizontalScale, vertical_scale : opts.VerticalScale, config : config);
                 vmfAdapter.Export(nailsMap);
             } catch(Exception e)
             {
-                log.Error("NailsCmd caught fatal exception: ", e);
+                log.Fatal("NailsCmd caught fatal exception: ", e);
             }
 
         }

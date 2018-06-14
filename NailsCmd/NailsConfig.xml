@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<NailsConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Agents>
+	  <!-- Tunnelers dig corridors or tunnels. -->
+	  <BaseAgent xsi:type="Tunneler">
+		<!-- Starting X, Y, and Z coordinates for this Tunneler -->
+		<X>0</X>
+		<Y>0</Y>
+		<Z>0</Z>
+		<!-- Width of tunnel produced by this tunneler. The width is always perpendicular to the direction of motion. -->
+		<Width>3</Width>
+		<!-- Height of the tunnel produced by this tunneler. -->
+		<Height>2</Height>
+		<!-- Number of steps this tunneler will take before expiring -->
+		<Lifetime>20</Lifetime>
+		<!-- Maximum number of steps this tunneler can take before expiring.
+		     Ideally, this number would be the same as the "Lifetime".
+		     The difference is that MaxLifetime is propogated to children.
+		     So if Lifetime is substantially longer or shorter than MaxLifetime,
+		     that will apply to the first tunneler but not to any children
+		     it produces. 
+		  -->
+		<MaxLifetime>20</MaxLifetime>
+		<!-- Probability each step that this tunneler will create a new tunneler.
+		     Should be a number between 0 and 1.
+		     The new tunneler will move in a random direction 
+		     perpendicular to this tunneler.
+		  -->
+		<ProbReproduce>0.05</ProbReproduce>
+		<!-- Probability each step that this tunneler will turn 90 degrees.
+		     Should be a number between 0 and 1.
+		  -->
+		<ProbTurn>0.1</ProbTurn>
+		<!-- Probability each step that this tunneler will ascend or
+		     descend by one cube.
+		  -->
+		<ProbAscend>0.05</ProbAscend>
+		<!-- The style of instance this tunneler will apply.
+		     The default is dev, a style provided with nails.
+		  -->
+		<Style>dev</Style>
+		<!-- Direction this tunneler will start traveling in.
+		  -->
+		<Direction>East</Direction>
+		<!-- Probability each step that this tunneler will create a roomer.
+		     Should be a number between 0 and 1.
+		     The roomer will deploy and create a room if most spaces in the
+		     potential room have not been marked previously.
+		  -->
+		<ProbSpawnRoomeer>0.005</ProbSpawnRoomeer>
+		<!-- Minimum amount to subtract from height when producing children.
+		     No height will be subtracted if the height of the parent is 1.
+		  -->
+		<MinHeightDecayRate>0</MinHeightDecayRate>
+		<!-- Maximum amount to subtract from height when producing children.
+		     No height will be subtracted if the height of the parent is 1.
+		  -->
+		<MaxHeightDecayRate>1</MaxHeightDecayRate>
+		<!-- Minimum amount to subtract from width when producing children.
+		     No width will be subtracted if the width of the parent is 1.
+		  -->
+		<MinWidthDecayRate>0</MinWidthDecayRate>
+		<!-- Maximum amount to subtract to height when producing children.
+		     No height will be subtracted if the height of the parent is 1.
+		  -->
+		<MaxWidthDecayRate>2</MaxWidthDecayRate>
+		<!-- Should this tunneler leave a roomer behind when it expires? -->
+		<SpawnRoomerOnDeath>true</SpawnRoomerOnDeath>
+		<!-- Amount by which the maximum lifetime decreases each generation -->
+		<LifetimeDecayRate>8</LifetimeDecayRate>
+		<!-- Maximum distance this tunneler can ascend or descend -->
+		<MaxVerticalDrop>1</MaxVerticalDrop>
+	  </BaseAgent>
+
+	  <!-- Roomers produce rooms. -->
+	  <BaseAgent xsi:type="Roomer">
+		<!-- Starting X, Y, and Z coordinates for this roomer. -->
+		<X>0</X>
+		<Y>0</Y>
+		<Z>0</Z>
+		<!-- Height of the room produced by this roomer. -->
+		<Height>4</Height>
+		<!-- The style of instance this roomer will apply.
+		     The default is dev, a style provided with nails.
+		  -->
+		<Style>dev</Style>
+		<!-- Maximum width the roomer will occupy -->
+		<MaxWidth>8</MaxWidth>
+		<!-- Whether or not to check surroundings before deploying roomer -->
+		<MustDeploy>true</MustDeploy>
+	  </BaseAgent>
+  </Agents>
+  <Styles>
+    <NailsStyle>
+      <Name>dev</Name>
+      <Instances>
+        <NailsInstance>
+          <Name>wall</Name>
+          <Filepaths>
+            <string>dev/wall.vmf</string>
+          </Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>ceiling</Name>
+          <Filepaths>
+            <string>dev/ceiling.vmf</string>
+          </Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>floor</Name>
+          <Filepaths>
+            <string>dev/floor.vmf</string>
+          </Filepaths>
+        </NailsInstance>
+		</Instances>
+    </NailsStyle>
+	  <NailsStyle>
+      <Name>RandomTest</Name>
+      <Instances>
+        <NailsInstance>
+          <Name>wall</Name>
+          <Filepaths>
+            <string>RandomTest/wall1.vmf</string>
+            <string>RandomTest/wall2.vmf</string>
+            <string>RandomTest/wall3.vmf</string>
+            <string>RandomTest/wall4.vmf</string>
+			</Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>ceiling</Name>
+          <Filepaths>
+            <string>RandomTest/ceiling1.vmf</string>
+            <string>RandomTest/ceiling2.vmf</string>
+            <string>RandomTest/ceiling3.vmf</string>
+            <string>RandomTest/ceiling4.vmf</string>			
+			</Filepaths>
+        </NailsInstance>
+        <NailsInstance>
+          <Name>floor</Name>
+          <Filepaths>
+            <string>RandomTest/floor1.vmf</string>
+            <string>RandomTest/floor2.vmf</string>
+            <string>RandomTest/floor3.vmf</string>
+            <string>RandomTest/floor4.vmf</string>
+			</Filepaths>
+        </NailsInstance>
+		</Instances>
+    </NailsStyle>
+  </Styles>
+</NailsConfig>
